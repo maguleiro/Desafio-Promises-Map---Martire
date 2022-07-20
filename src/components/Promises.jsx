@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import MapEjemplo from "./MapEjemplo";
 
 //spinner
 
@@ -38,10 +39,16 @@ const Promises = () =>{
 			});
 	}, []);
 
-	if(loading) return <Spinner />;
+	if(loading) return (
+		<>
+		<h1 className="carga"> Cargando Catalogo</h1>
+		<Spinner />;
+		</>
+	)
+
 	return(
 	<>
-	<h1> No hay promesas ejecutandose</h1>
+		<MapEjemplo />
 	</>
 )};
 
