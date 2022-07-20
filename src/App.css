@@ -49,3 +49,9 @@
   justify-content: space-around;
   padding-top:15% ;
 }
+
+.card{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
