@@ -1,5 +1,19 @@
 import { useState, useEffect } from "react";
-import Spinner from "./Spinner";
+
+//spinner
+
+const Spinner = () => {
+	return (
+		<div className="spinner">
+			<div class="spinner-border" role="status">
+			  <span class="visually-hidden">Loading...</span>
+			</div>
+		</div>
+		)
+}
+
+
+//promise
 
 const Promises = () =>{
 	const [loading, setLoading] = useState(false);

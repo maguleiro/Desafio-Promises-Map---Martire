@@ -1,4 +1,94 @@
-import Card from "./Card";
+import { useState } from "react";
+
+//itemcount
+
+const ItemCount = ({ stock =2, initial =0, onAdd }) =>{
+	const [count, setCount] = useState(initial || 1);
+	const updateCount = (op) =>{
+		if (op === "-" && count > 0) {
+			setCount(count - 1);
+		}
+		if (op === "+" && count < stock){
+			setCount(count +1);
+		}
+	};
+	const updateCountInput = (e) => {
+		const { value } = e.target;
+		if (value <= stock){
+			setCount(isNaN(value) ? 0 : parseInt(value));
+		}
+	};
+	return (
+		<>
+		<div className="input-group input-sppiner mb-3 d-flex justify-content-center">
+			<input
+				onChange={(e) => updateCountInput(e)}
+				className="border-primary"
+				placeholder=""
+				value={count}
+				type="number"
+			/>
+			<button
+				onClick={() => updateCount("-")}
+				className="btn btn-icon btn-primary"
+				type="button"
+			>
+				-
+			</button>
+			<button
+				onClick={() => updateCount("+")}
+				className="btn btn-icon btn-primary"
+				type="button"
+			>
+				+
+			</button>
+		</div>
+		<div className="d-flex justify-content-center">
+			<button
+				onClick={() => onAdd(count)}
+				type="button"
+				className="btn btn-info"
+				disabled={count === "" || count === 0}
+			>
+				Comprar!
+			</button>
+		</div>
+		</>
+	);
+};
+
+//itemlistcointainer
+
+const ItemListContainer = ({ greeting }) => {
+	const onAddItem = (count) => {
+		console.log(typeof count);
+		alert('${count} los articulos seran agregados al carrito.');
+	};
+	return <ItemCount stock ={5} initial ={1} onAdd={onAddItem}></ItemCount>;
+};
+
+//card para mostrar info de productos
+
+const Card = ({ name, precio, img }) =>{
+	return(
+	<div className="card-group p-2">
+	<div className="card" style={{width:"18rem"}}>
+	<img class="card-img-top" src={img}/> 
+	  	<div className="card-body">
+		    <h5 className="card-title">{name}</h5>
+		    <p className="card-text">${precio}</p>
+		    <ItemListContainer />
+	  	</div>
+	</div>
+	</div>
+
+ 	);
+}
+
+
+
+
+//map
 
 const MapEjemplo = () => {
 	const productos = [{
